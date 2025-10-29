@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sign up — SR Hutextnizer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="assets/styles.css" rel="stylesheet">
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+</head>
+<body class="bg-[#f8faff] min-h-screen">
+  <header class="bg-white shadow">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <a href="index.html" class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold">SR</div>
+          <div class="hidden sm:block">
+            <div class="text-lg font-bold text-gray-800">SR Hutextnizer</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-md mx-auto p-6">
+    <h1 class="text-2xl font-bold mb-4">Create an account</h1>
+    <form id="signupForm" class="bg-white p-6 rounded border space-y-3">
+      <input id="name" class="w-full p-3 border rounded" placeholder="Full name" required />
+      <input id="email" type="email" class="w-full p-3 border rounded" placeholder="Email" required />
+      <input id="password" type="password" class="w-full p-3 border rounded" placeholder="Password" required />
+      <div class="flex gap-2">
+        <button type="submit" class="btn-primary py-2 px-4 rounded text-white">Create account</button>
+        <a href="login.html" class="py-2 px-4 border rounded">Login</a>
+      </div>
+      <div class="text-xs text-gray-500 mt-2">By creating an account you agree to our Terms & Privacy.</div>
+    </form>
+  </main>
+
+  <script src="assets/app.js" defer></script>
+</body>
+</html>

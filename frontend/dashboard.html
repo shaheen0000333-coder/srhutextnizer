@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dashboard — SR Hutextnizer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="assets/styles.css" rel="stylesheet">
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+</head>
+<body class="bg-[#f8faff] min-h-screen">
+  <header class="bg-white shadow">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <a href="index.html" class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold">SR</div>
+          <div class="hidden sm:block">
+            <div class="text-lg font-bold text-gray-800">SR Hutextnizer</div>
+          </div>
+        </a>
+
+        <div class="flex items-center gap-4">
+          <div id="dashboardUser" class="text-sm text-gray-700">Signed out</div>
+          <button id="logoutBtn" class="py-2 px-3 border rounded">Logout</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto p-6">
+    <section class="bg-white p-6 rounded shadow">
+      <h2 class="text-xl font-semibold mb-2">Your Converter</h2>
+      <p class="text-sm text-gray-600 mb-4">This is your personal workspace. Conversions you make here can be saved (demo: localStorage) and will be stored in DB once server is connected.</p>
+
+      <label class="block mb-2 text-sm">Tone</label>
+      <select id="dashTone" class="w-full border p-3 rounded mb-3">
+        <option value="natural">Natural</option>
+        <option value="casual">Casual</option>
+        <option value="professional">Professional</option>
+        <option value="friendly">Friendly</option>
+      </select>
+
+      <textarea id="dashInput" class="w-full p-4 border rounded min-h-[8rem]" placeholder="Type or paste text here..."></textarea>
+
+      <div class="flex items-center justify-between mt-3">
+        <div>Word Count: <span id="dashWordCount">0</span> / <span id="dashLimit">10000</span></div>
+        <div>
+          <button id="dashHumanize" class="btn-primary py-2 px-4 rounded text-white">Humanize</button>
+          <button id="saveConv" class="py-2 px-4 border rounded ml-2">Save (local)</button>
+        </div>
+      </div>
+
+      <div id="dashOutput" class="mt-4 bg-gray-50 p-4 rounded min-h-[6rem] hidden"></div>
+    </section>
+
+    <section class="mt-6 bg-white p-6 rounded shadow">
+      <h3 class="font-semibold mb-2">Saved Conversions (demo)</h3>
+      <div id="savedList" class="space-y-3 text-sm"></div>
+    </section>
+  </main>
+
+  <script src="assets/app.js" defer></script>
+</body>
+</html>

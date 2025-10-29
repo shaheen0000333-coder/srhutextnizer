@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SR Hutextnizer — Humanize Your Text</title>
+  <meta name="description" content="SR Hutextnizer converts AI or formal text into natural, human-sounding prose. Free: 10,000 words. Paid: unlimited." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="assets/styles.css" rel="stylesheet">
+  <!-- Firebase SDK (compat) -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+</head>
+<body class="bg-[#f8faff] min-h-screen">
+  <!-- NAVBAR -->
+  <header class="bg-white shadow">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center gap-3">
+          <a href="index.html" class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold">SR</div>
+            <div class="hidden sm:block">
+              <div class="text-lg font-bold text-gray-800">SR Hutextnizer</div>
+              <div class="text-xs text-gray-500">Make AI text sound human</div>
+            </div>
+          </a>
+        </div>
+        <nav class="hidden md:flex items-center gap-6 text-sm">
+          <a href="index.html" class="hover:underline">Home</a>
+          <a href="pricing.html" class="hover:underline">Pricing</a>
+          <a href="signup.html" id="navLogin" class="hover:underline">Login</a>
+          <a href="dashboard.html" id="navDashboard" class="btn-primary text-white py-2 px-4 rounded">Dashboard</a>
+        </nav>
+        <div class="md:hidden">
+          <button id="mobileMenuBtn" class="p-2 rounded border">Menu</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="max-w-7xl mx-auto p-6 grid lg:grid-cols-2 gap-6">
+    <!-- Left: Hero -->
+    <section class="bg-white p-6 rounded-xl shadow">
+      <h1 class="text-3xl font-extrabold text-gradient mb-3">Humanize text in one click</h1>
+      <p class="text-gray-600 mb-4">Convert robotic, formal or AI-generated text into natural, conversational prose while preserving meaning — great for emails, blog drafts, social captions, and more.</p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6 text-sm">
+        <div class="p-3 border rounded">Free — 10,000 words / month</div>
+        <div class="p-3 border rounded">Pro — Unlimited words</div>
+        <div class="p-3 border rounded">Tone presets — Pro</div>
+        <div class="p-3 border rounded">Priority processing — Pro</div>
+      </div>
+
+      <div class="flex gap-3">
+        <a href="#converter" class="btn-primary py-3 px-6 rounded text-white">Try Demo</a>
+        <a href="pricing.html" class="py-3 px-6 rounded border">See Pricing</a>
+      </div>
+    </section>
+
+    <!-- Right: Converter -->
+    <section id="converter" class="bg-white p-6 rounded-xl shadow">
+      <div class="flex items-start justify-between">
+        <div>
+          <h2 class="text-2xl font-semibold mb-1">SR Hutextnizer — Converter</h2>
+          <p class="text-xs text-gray-500">Sign up to use the full converter. Free users: 10,000 words per month.</p>
+        </div>
+      </div>
+
+      <label class="block mt-4 text-sm mb-1">Tone</label>
+      <select id="toneSelect" class="w-full p-3 border rounded">
+        <option value="natural">Natural</option>
+        <option value="casual">Casual</option>
+        <option value="professional">Professional</option>
+        <option value="friendly">Friendly</option>
+      </select>
+
+      <textarea id="inputText" class="w-full p-4 border rounded mt-3 min-h-[12rem]" placeholder="Paste your text here..."></textarea>
+
+      <div class="flex items-center justify-between mt-3">
+        <div class="text-sm">Word Count: <span id="wordCount">0</span> / <span id="limitSpan">10000</span></div>
+        <div>
+          <button id="humanizeBtn" class="btn-primary text-white py-2 px-4 rounded">Humanize Text</button>
+        </div>
+      </div>
+
+      <p id="limitWarning" class="hidden text-red-600 text-sm mt-2">Word limit exceeded — upgrade for unlimited.</p>
+
+      <div id="outputArea" class="mt-4 bg-gray-50 p-4 rounded min-h-[8rem]">
+        <div id="outputPlaceholder" class="italic text-gray-500">Your humanized text will appear here after conversion.</div>
+        <pre id="outputText" class="hidden whitespace-pre-wrap"></pre>
+      </div>
+
+      <div id="citations" class="mt-3 hidden">
+        <h4 class="font-semibold text-sm mb-1">References</h4>
+        <ul id="citationsList" class="text-xs text-blue-600"></ul>
+      </div>
+
+      <div class="mt-4 text-xs text-gray-500">
+        <span id="userStatus">Not signed in</span> — <a href="signup.html" class="text-indigo-600 underline">Sign up</a> to save conversions and upgrade.
+      </div>
+    </section>
+  </main>
+
+  <footer class="max-w-7xl mx-auto p-6 text-center text-sm text-gray-500">&copy; 2025 SR Hutextnizer</footer>
+
+  <script src="assets/app.js" defer></script>
+</body>
+</html>
