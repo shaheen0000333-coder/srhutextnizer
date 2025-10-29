@@ -1,34 +1,35 @@
-// api/humanize.js
+import axios from "axios";
+
 export default async function handler(req, res) {
-  const { text } = await req.json();
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
+  }
+
+  const { text } = req.body;
 
   if (!text) {
     return res.status(400).json({ error: "No text provided" });
   }
 
-  const response = await fetch("https://api.openai.com/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
-    },
-    body: JSON.stringify({
+  try {
+    // example: using OpenAI-like model
+    const response = await axios.post("https://api.openai.com/v1/chat/completions", {
       model: "gpt-3.5-turbo",
       messages: [
-        {
-          role: "system",
-          content: "You are a text humanizer. Rewrite the given text in a natural, human-like tone.",
-        },
-        {
-          role: "user",
-          content: text,
-        },
-      ],
-    }),
-  });
+        { role: "system", content: "You rewrite AI text to sound natural and human-like." },
+        { role: "user", content: text }
+      ]
+    }, {
+      headers: {
+        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
+        "Content-Type": "application/json"
+      }
+    });
 
-  const data = await response.json();
-  const humanized = data.choices?.[0]?.message?.content || "Error processing text.";
-
-  return res.status(200).json({ result: humanized });
+    const humanized = response.data.choices[0].message.content;
+    res.status(200).json({ humanized });
+  } catch (err) {
+    console.error("Humanize error:", err.response?.data || err.message);
+    res.status(500).json({ error: "Server error" });
+  }
 }
